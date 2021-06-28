@@ -1,0 +1,76 @@
+import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.lang.Math.log1p;
+
+class Calculator
+{
+    public double A;
+    public double B;
+
+    Calculator(double a, double b)
+    {
+        this.A=Math.log(a);
+        this.B=Math.log(b);
+    }
+
+    void Sum()
+    {
+        System.out.println("Сумма этих чисел (их натуральных логарифмов) будет равна: " + (A+B));
+    }
+
+    void Min()
+    {
+        System.out.println("Разность этих чисел (их натуральных логарифмов) будет равна: " + (A-B));
+    }
+
+    void Umn()
+    {
+        System.out.println("Произведение этих чисел (их натуральных логарифмов) будет равна: " + (A*B));
+    }
+
+    void Del()
+    {
+        System.out.println("Частное этих чисел (их натуральных логарифмов) будет равна: " + (A/B));
+    }
+
+    void Step()
+    {
+        System.out.println("Возведение в степень этих чисел (их натуральных логарифмов) будет равна: " + Math.pow(A,B));
+    }
+    void Osn()
+    {
+        System.out.println("Переход на другое основание этих чисел будет равна: A=" + log1p(A)+" B="+ log1p(B));
+    }
+}
+
+
+class Main{
+    public static void main(String[] args){
+        try
+        {
+         System.out.println("Введите два числа.");
+         Scanner sc = new Scanner(System.in);
+         double a, b;
+
+         a = sc.nextDouble();
+         b = sc.nextDouble();
+
+         Calculator calculator = new Calculator(a, b);
+
+         calculator.Sum();
+         calculator.Min();
+         calculator.Umn();
+         calculator.Del();
+         calculator.Step();
+         calculator.Osn();
+        }
+        catch (Exception e)
+        {
+            System.err.println("Ошибка: "+ e);
+        }
+    }
+}
+
+

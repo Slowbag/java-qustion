@@ -1,0 +1,65 @@
+import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Array
+{
+    ArrayList<Integer> arrayList;
+    int size;
+    Array(int s)
+    {
+        arrayList = new ArrayList<Integer>(s);
+        this.size = s;
+    }
+
+    public void finalize()// throws Throwable
+    {
+        System.out.println("Деструктор сработал. ");
+    }
+
+    public void Rand()
+    {
+        Random random = new Random();
+        for (int i=0; i<size; i++)
+        {
+            arrayList.add(i, random.nextInt(20));
+        }
+    }
+
+    public void Show()
+    {
+        System.out.println(arrayList);
+    }
+
+    public void ArrRandSort()
+    {
+        Collections.shuffle(arrayList);
+    }
+
+    public void ShowCount()
+    {
+            Map<Object, Long> counts = arrayList.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+            System.out.println(counts);
+    }
+
+}
+
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите размер динамического массива.");
+        int s=sc.nextInt();
+
+        Array array = new Array(s);
+
+        array.Rand();
+        array.Show();
+        array.ArrRandSort();
+        array.Show();
+        array.ShowCount();
+
+        array.finalize();
+    }
+}
+
+
