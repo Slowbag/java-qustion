@@ -1,0 +1,52 @@
+import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Administrator
+{
+    protected void BlockKK()
+    {
+        System.out.println("Кредитная Карта заблогирована.");
+    }
+}
+class Client extends Administrator
+{
+    void Pay()
+    {
+        System.out.println("Клиент оплатил заказ.");
+    }
+    void shift()
+    {
+        System.out.println("Клиент перевёл платёж.");
+    }
+    void Onnul()
+    {
+        System.out.println("Счёт аннулирован.");
+    }
+
+}
+
+
+class Main{
+    public static void main(String[] args){
+        System.out.println("---------------------------------------------");
+        System.out.println("Возможности клиента");
+        System.out.println("---------------------------------------------");
+
+        Client client = new Client();
+        client.Pay();
+        client.shift();
+        client.Onnul();
+        client.BlockKK();
+
+        System.out.println("---------------------------------------------");
+        System.out.println("Возможности администратора.");
+        System.out.println("---------------------------------------------");
+
+        Administrator administrator = new Administrator();
+        administrator.BlockKK();
+        System.out.println("---------------------------------------------");
+    }
+}
+
+
