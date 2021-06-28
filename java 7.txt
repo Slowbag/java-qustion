@@ -1,0 +1,111 @@
+public class Rectangle {
+    
+    private Apex topLeft;
+    private Apex bottomRight;
+    
+    private double height;
+    private double width;
+    
+    public Rectangle()
+    {
+        this.topLeft = new Apex();
+        this.bottomRight = new Apex();
+        
+        updateParams();
+    }
+    
+    public Rectangle(Apex topLeft, Apex bottomRight)
+    {
+        this.topLeft = new Apex(topLeft);
+        this.bottomRight = new Apex(bottomRight);
+        
+        updateParams();
+    }
+    
+    public Rectangle(double topLeftX, double topLeftY, double bottomRightX, double bottomRightY)
+    {
+        this.topLeft = new Apex(topLeftX, topLeftY);
+        this.bottomRight = new Apex(bottomRightX, bottomRightY);
+        
+        updateParams();
+    }
+    
+    public double getWidth()
+    {
+        return width;
+    }
+    
+    public double getHeight()
+    {
+        return height;
+    }
+    
+    public void resize(Apex newTopLeft, Apex newBottomRight)
+    {
+        this.topLeft.setXY(newTopLeft.getX(), newTopLeft.getY());
+        this.bottomRight.setXY(newBottomRight.getX(), newBottomRight.getY());
+        
+        updateParams();
+    }
+    
+    public void resize(double newTopLeftX, double newTopLeftY, double newBottomRightX, double newBottomRightY)
+    {
+        this.topLeft.setXY(newTopLeftX, newTopLeftY);
+        this.bottomRight.setXY(newBottomRightX, newBottomRightY);
+        
+        updateParams();
+    }
+    
+    private void updateParams()
+    {
+        width = bottomRight.getX() - topLeft.getX();
+        height = bottomRight.getY() - topLeft.getY();
+    }
+}
+------------------------------------------------------------------------
+public class Apex {
+ 
+    private double x;
+    private double y;
+    
+    public Apex()
+    {
+        this.setXY(0.0, 0.0);
+    }
+    
+    public Apex(double x, double y)
+    {
+        this.setXY(x, y);
+    }
+    
+    public Apex(Apex apex)
+    {
+        this.setXY(apex.getX(), apex.getY());
+    }
+    
+    public double getX()
+    {
+        return x;
+    }
+    
+    public double getY()
+    {
+        return y;
+    }
+    
+    public void setX(double x)
+    {
+        this.x = x;
+    }
+    
+    public void setY(double y)
+    {
+        this.y = y;
+    }
+    
+    public void setXY(double x, double y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+}

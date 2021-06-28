@@ -1,0 +1,67 @@
+abstract class Animal {
+
+    abstract public void say();
+
+    abstract public String sayName();
+
+    abstract public void run();
+
+    abstract public void eat();
+}
+
+class Cat extends Animal {
+    public void say(){
+        System.out.println("Мяу");
+    }
+
+    public String sayName() {
+        return "Барсик";
+    }
+
+    public void run() {
+        System.out.println("Мягко подбегает");
+    }
+
+    public void eat() {
+        System.out.println("Ням-ням, мур!");
+    }
+}
+
+class Dog extends Animal {
+    public void say(){
+        System.out.println("Гав-гав");
+    }
+
+    public String sayName() {
+        return "Шарик";
+    }
+
+    public void run() {
+        System.out.println("Подбегает");
+    }
+
+    public void eat() {
+        System.out.println("Хрум-хрум, гав!");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        Animal[] animals = new Animal[]{new Cat(), new Dog()};
+
+        for(Animal animal: animals){
+            feedAnimal(animal);
+        }
+    }
+
+    private static void feedAnimal(Animal animal){
+        System.out.println("---------------");
+        System.out.printf("Подзываем питомца: - %1$s, %1$s !\n", animal.sayName());
+        animal.run();
+        System.out.printf("Хочешь вкусненького, %s ?\n", animal.sayName());
+        animal.say();
+        System.out.printf("Насыпаем корма для %s\n", animal.sayName());
+        animal.eat();
+    }
+}

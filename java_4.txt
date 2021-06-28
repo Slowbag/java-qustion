@@ -1,0 +1,171 @@
+import java.util.*;
+ 
+class Vector{
+    private int[] mas;
+    
+    Vector(int size){                                   //конструктор
+        mas = new int[size];
+    }
+    
+    void set_mas(int val, int i){                       //метод инициализации элемента массива
+ 
+            mas[i] = val;
+    }
+    
+    int get_size(){                                     //метод получения размера массива
+ 
+        return mas.length;
+    }
+    
+    void show_mas(){                                    //метод вывода массива на консоль
+        System.out.print("Массив: ");
+        for(int i : mas)
+            System.out.print(i + " ");
+        System.out.println();
+    }
+    
+    boolean get_element(int index){                     //метод обращения к отдельному элементу массива
+        
+        if(index < mas.length) {
+            System.out.println("Искомый элемент: " + mas[index]);
+            return false;
+        }
+        else {
+            System.out.println("Не правильный индекс массива!");
+            System.out.println("Введите числов от 0 до " + mas.length);
+            System.out.println();
+            return true;
+        }
+    }
+    
+    int get_el(int i){                          //получение элемента без проверки выхода за пределы массива
+        return mas[i];
+    }
+    
+    void atomic_addition(Vector ob){                        //метод сложения двух массиво
+        if(mas.length == ob.get_size()){
+            for(int i = 0; i < mas.length; ++i)
+                mas[i] += ob.get_el(i);
+        }
+        else
+            System.out.println("Массивы разной длины!");
+    }
+    
+    void atomic_subtraction(Vector ob){                     //метод вычетания двух массиво
+        if(mas.length == ob.get_size()){
+            for(int i = 0; i < mas.length; ++i)
+                mas[i] -= ob.get_el(i);
+        }
+        else
+            System.out.println("Массивы разной длины!");
+    }
+    
+    void multiplication_by_scalar(int scalar){              //метод умножения на скаляр
+            for(int i = 0; i < mas.length; ++i)
+                mas[i] *= scalar;
+    }
+    
+    void division_by_scalar(int scalar){                    //метод деления на скаляр
+            for(int i = 0; i < mas.length; ++i)
+                mas[i] /= scalar;
+    }
+}
+ 
+public class Demo {
+ 
+    public static void main(String[] args){
+     
+        Scanner sc = new Scanner(System.in);
+        
+        int size_mas = 0;
+        boolean flag = true;
+        
+        while(flag){
+            try{
+                System.out.print("Введите размерность массива: ");
+                size_mas = sc.nextInt();
+                flag = false;
+            }
+            catch(InputMismatchException exc){
+                System.out.println("Некорректный ввод данных!\n");
+                sc.next();
+            }
+        }
+        
+        System.out.println();
+        Vector mas = new Vector(size_mas);                      //создание вектора необходимого размера
+        
+        int temp;
+        for(int i = 0; i < mas.get_size(); ++i){                        //инициализация массива
+            flag = true;
+            
+            while(flag){
+                try{
+                    System.out.print("Введите элемент массива: ");
+                    temp = sc.nextInt();
+                    mas.set_mas(temp, i);
+                    flag = false;
+                }
+                catch(InputMismatchException exc){
+                    System.out.println("Некорректный ввод данных!\n");
+                    sc.next();
+                }
+            }
+        }
+        
+        System.out.println();
+        mas.show_mas();                                         //вывод массива
+        
+        flag = true;
+        boolean _flag = true;
+        System.out.println();
+        
+        while(flag){                                                    //бращение к элементу по индексу
+            _flag = true;
+            
+            while(_flag){
+                try{
+                    System.out.print("Введите индекс искомого элемента: ");
+                    int _index = sc.nextInt();
+                    _flag = false;
+                    flag = mas.get_element(_index);
+                }
+                catch(InputMismatchException exc){
+                    System.out.println("Некорректный ввод данных!\n");
+                    sc.next();
+                }
+            }
+        }
+        
+        System.out.println();
+        Vector mas2 = new Vector(size_mas);                         //создали второй вектор
+        
+        for(int i = 0; i < mas2.get_size(); ++i)                    //заполнили 1,2,3,4,5
+            mas2.set_mas(i + 1, i);     
+        
+        System.out.println("Второй массив: ");
+        mas2.show_mas();                                            //выводим второй массив
+        System.out.println();
+        
+        System.out.println("Складываемый первый со вторым");
+        mas.atomic_addition(mas2);                                  //сложили массивы
+        mas.show_mas();                                             //вывели полученный массив
+        System.out.println();
+        
+        System.out.println("Вычетаем второй из первого");
+        mas.atomic_subtraction(mas2);;                                  //вычели массивы
+        mas.show_mas();                                             //вывели полученный массив
+        System.out.println();
+        
+        int _calar = 10;
+        System.out.println("Умножаем первый на скаляр");
+        mas.multiplication_by_scalar(_calar);                       //умножили массив на скаляр
+        mas.show_mas();                                             //вывели полученный массив
+        System.out.println();
+        
+        System.out.println("Делим первый на скаляр");
+        mas.division_by_scalar(_calar);                             //разделили массив на скаляр
+        mas.show_mas();                                             //вывели полученный массив
+        System.out.println();
+    }
+}
