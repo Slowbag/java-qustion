@@ -1,0 +1,72 @@
+package com.company;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
+
+class Helper {
+
+public static void main(String[] args) {
+Subscriber [] subsArr = getSubscArray(11);
+Arrays.stream(subsArr)
+.filter(sbr -> sbr.getLocalTimeSec() > 50) //время городских переговоров превышает заданное.
+.forEach(System.out::println);
+}
+
+static Subscriber [] getSubscArray(final int count) {
+return Stream.generate(Subscriber::new)
+.limit(count)
+.map(Helper::setTimes)
+.toArray(Subscriber[]::new);
+}
+
+static Subscriber setTimes(Subscriber sb) {
+sb.setLocalTimeSec(ThreadLocalRandom.current().nextInt(10, 100));
+return sb;
+}
+
+}
+
+class Subscriber {
+private static int uniqId = 1000;
+private int id;
+private int localTimeSec = 0;
+
+Subscriber() {
+id = uniqId++;
+}
+
+@Override
+public boolean equals(Object o) {
+if (this == o) return true;
+if (o == null || getClass() != o.getClass()) return false;
+Subscriber that = (Subscriber) o;
+return id == that.id &&
+localTimeSec == that.localTimeSec;
+}
+
+@Override
+public int hashCode() {
+return Objects.hash(id, localTimeSec);
+}
+
+void setLocalTimeSec(int localTimeSec) {
+this.localTimeSec = localTimeSec;
+}
+
+public int getId() {
+return id;
+}
+
+public int getLocalTimeSec() {
+return localTimeSec;
+}
+
+@Override
+public String toString() {
+return "Subscriber{" +
+"id=" + id +
+", localTimeSec=" + localTimeSec +
+'}';
+}
+}
