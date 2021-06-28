@@ -1,0 +1,76 @@
+import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Machine
+{
+    public String[] Marks = {"BMW", "Mersedes", "Lada", "Hyndai"};
+    public String Mark;
+    public int ZilindrCount;
+    public String Moshnost;
+
+    Machine(int m, int zilindrCount, String moshnost)
+    {
+        this.Mark = Marks[m];
+        this.ZilindrCount = zilindrCount;
+        this.Moshnost = moshnost;
+    }
+
+    Machine() {
+    }
+
+    public void finalize()
+    {
+        System.out.println("Деструктор сработал.");
+    }
+
+    public void Pechat()
+    {
+        System.out.println("Печать пошла.");
+    }
+
+    public void Show()
+    {
+        System.out.println("\nМарка машины: "+Mark+"\nЧисло цилиндров: "+ZilindrCount+"\nМощность: "+Moshnost+"\n");
+    }
+}
+
+class Truck extends Machine
+{
+    //  Truck() {    } Конструктор по умолчанию.
+
+    Truck(int m, int count, String str)
+    {
+        this.Mark = Marks[m];
+        this.ZilindrCount = count;
+        this.Moshnost = str;
+
+    }
+}
+
+
+class Main{
+    public static void main(String[] args){
+
+        System.out.println("----------------------------------------");
+        System.out.println("Класс Машина.");
+        System.out.println("----------------------------------------");
+        Machine m1 = new Machine(2, 50, "Средняя");
+        m1.Pechat();
+        m1.Show();
+        m1.finalize();
+        System.out.println("----------------------------------------");
+
+        System.out.println("Класс Грузовик.");
+        System.out.println("----------------------------------------");
+        Truck t1 = new Truck(1, 45, "Высокая");
+        t1.Pechat();
+        t1.Show();
+        t1.finalize();
+        System.out.println("----------------------------------------");
+
+
+    }
+}
+
+
