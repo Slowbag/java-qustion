@@ -1,0 +1,74 @@
+import java.*;
+
+abstract class Figure{
+    
+    public abstract double Area();    
+    public abstract double Perimeter();    
+    public abstract  void Show();
+}
+class Rectangle extends Figure{
+    private double width;
+    private double height;
+    
+    Rectangle(double width, double height){
+        this.width=width;
+        this.height=height;
+    }
+    public double Area(){
+        return width*height;
+    }
+    public double Perimeter(){
+        return (width+height)*2;
+    }
+    public void Show(){
+        System.out.println("Прямоугольник со сторонами "+width+" и "+height+" имеет площадь ="+Area()+" и периметр ="+ Perimeter());
+    }
+}
+class Circle extends Figure{
+    private double radius;
+    Circle(double radius){
+        this.radius=radius;
+    }
+    public double Area(){
+        return Math.PI*Math.pow(radius,2);
+    }
+    public double Perimeter(){
+        return Math.PI*radius*2;
+    }
+    public void Show(){
+        System.out.println("Круг с радиусом "+radius+" имеет площадь ="+Area()+" и периметр ="+ Perimeter());
+    }
+}
+class Triangle extends Figure{
+    private double a;
+    private double b;
+    private double c;
+    double p=0;
+    
+    Triangle(double a, double b,  double c){
+        this.a=a;
+        this.b=b;
+        this.c=c;
+    }
+    public double Area(){
+        p=(a+b+c)/2;
+        return Math.sqrt(p*(p-a)*(p-b)*(p-c));
+    }
+    public double Perimeter(){
+        return a+b+c;
+    }
+    public void Show(){
+        System.out.println("Треугольник со сторонами "+a+", "+ b+" и "+c+" имеет площадь ="+Area()+" и периметр ="+ Perimeter());
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+	    Rectangle r=new Rectangle(2.5,4.3);
+	    Circle c=new Circle(3);
+	    Triangle t=new Triangle(3,4,5);
+	    r.Show();
+	    c.Show();
+	    t.Show();
+	}
+}
