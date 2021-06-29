@@ -1,0 +1,93 @@
+Исходный код модуля Point.java
+:
+
+import java.util.Scanner;
+class Point {
+ public double x, y;
+ public Point(double x_, double y_) {
+  x = x_;
+  y = y_;
+ }
+ public Point() {
+  this(0, 0);
+ }
+ public static double distance(Point a, Point b) {
+  double dx = a.x - b.x;
+  double dy = a.y - b.y;
+  return Math.sqrt(dx * dx + dy * dy);
+ }
+ public void print() {
+  System.out.println("x: " + x + ", y: " + y);
+ }
+ public void read(Scanner scanner) {
+  System.out.print("x: ");
+  x = scanner.nextDouble();
+  System.out.print("y: ");
+  y = scanner.nextDouble();
+ }
+}
+
+Тут в метод read
+передается объект java.util.Scanner, который будет создаваться в классе Main
+.
+
+Модуль Triangle.java
+:
+
+class Triangle {
+ private Point a, b, c;
+ public Triangle(Point a_, Point b_, Point c_) {
+  a = a_;
+  b = b_;
+  c = c_;
+ }
+ public double square() {
+  // формула Герона
+  double ab = Point.distance(a, b);
+  double bc = Point.distance(b, c);
+  double ac = Point.distance(a, c);
+  double p = (ab + bc + ac) / 2;
+  return Math.sqrt(p * (p - ab) * (p - bc) * (p - ac));
+ }
+ public double perimeter() {
+  double ab = Point.distance(a, b);
+  double bc = Point.distance(b, c);
+  double ac = Point.distance(a, c);
+  return ab + bc + ac;
+ }
+ public Point median_crossing() {
+  return new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
+ }
+ public void print() {
+  System.out.print("A: ");
+  a.print();
+  System.out.print("B: ");
+  b.print();
+  System.out.print("C: ");
+  c.print();
+ }
+}
+
+В модуле Main.java
+создаются три точки, а затем – из них конструируется треугольник. Вычисляемая медиана также является точкой:
+
+import java.util.Scanner;
+public class Main {
+ public static void main(String[] args) {
+  Scanner scanner = new Scanner(System.in);
+  Point a = new Point();
+  Point b = new Point();
+  Point c = new Point();
+  System.out.println("enter A: ");
+  a.read(scanner);
+  System.out.println("enter B: ");
+  b.read(scanner);
+  System.out.println("enter C: ");
+  c.read(scanner);
+  Triangle triangle = new Triangle(a, b, c);
+  System.out.println("square: " + triangle.square());
+  System.out.println("perimeter: " + triangle.perimeter());
+  System.out.print("median_crossing: ");
+  triangle.median_crossing().print();
+ }
+}
